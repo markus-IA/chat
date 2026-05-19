@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 205 60% 88%;
+    --foreground: 222 30% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 30% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 30% 15%;
+
+    /* Telegram blue */
+    --primary: 207 89% 54%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 207 89% 54%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 207 89% 54%;
+
+    --radius: 0.75rem;
+
+    /* Telegram-specific tokens */
+    --tg-header: 207 89% 54%;
+    --tg-header-foreground: 0 0% 100%;
+    --tg-miniapp-header: 222 35% 22%;
+    --tg-chat-bg: 205 60% 88%;
+    --tg-bubble: 0 0% 100%;
+    --tg-bubble-foreground: 222 30% 15%;
+    --tg-system-bubble: 210 35% 70%;
+    --tg-system-foreground: 0 0% 100%;
+    --tg-time: 215 16% 55%;
+    --tg-link: 207 89% 45%;
+    --tg-input-bg: 0 0% 100%;
+    --tg-online: 142 71% 45%;
+    --tg-reaction-bg: 207 80% 95%;
+    --tg-reaction-foreground: 207 89% 45%;
+
+    /* Phone frame */
+    --phone-bezel: 0 0% 5%;
+    --phone-notch: 0 0% 0%;
+
+    --shadow-bubble: 0 1px 1px hsl(0 0% 0% / 0.08);
+    --shadow-phone: 0 30px 60px -15px hsl(0 0% 0% / 0.5), 0 0 0 2px hsl(0 0% 12%);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
+@layer components {
+  /* Telegram chat wallpaper - subtle pattern */
+  .tg-wallpaper {
+    background-color: hsl(var(--tg-chat-bg));
+    background-image:
+      radial-gradient(circle at 20% 20%, hsl(207 70% 95% / 0.5) 0%, transparent 40%),
+      radial-gradient(circle at 80% 70%, hsl(207 70% 95% / 0.4) 0%, transparent 40%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'><g fill='%23ffffff' fill-opacity='0.18' font-family='sans-serif' font-size='10'><text x='5' y='15'>✦</text><text x='35' y='30'>+</text><text x='10' y='45'>✦</text><text x='45' y='55'>+</text></g></svg>");
+  }
+
+  .bubble-tail-left {
+    position: relative;
+  }
+  .bubble-tail-left::before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: 0;
+    width: 12px;
+    height: 14px;
+    background: hsl(var(--tg-bubble));
+    clip-path: path('M12 0 L12 14 L0 0 Z');
+  }
+}
+
+@keyframes message-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.animate-message-in {
+  animation: message-in 0.25s ease-out both;
+}
+
+@keyframes typing-dot {
+  0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+  30% { opacity: 1; transform: translateY(-2px); }
+}
+.typing-dot { animation: typing-dot 1.2s infinite; }
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
